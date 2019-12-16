@@ -80,6 +80,9 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\AllMailViewModel.cs" />
     <Compile Include="ViewModels\OneMailViewModel.cs" />
+    <Compile Include="Views\LoginPopup.xaml.cs">
+      <DependentUpon>LoginPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OneMail.xaml.cs">
       <DependentUpon>OneMail.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Folders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
