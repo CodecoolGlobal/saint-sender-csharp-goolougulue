@@ -59,11 +59,11 @@ namespace SaintSender.Core.Services
             {
                 foreach(var message in messages)
                 {
+                    var messageBody = service.Users.Messages.Get("me", message.Id).Execute().Payload.Body.Data;
                     string decodedString = "";
-                    if (service.Users.Messages.Get("me", message.Id).Execute().Payload.Body.Data != null)
+                    if (messageBody != null)
                     {
-
-                        byte[] bytes = Convert.FromBase64String(service.Users.Messages.Get("me", message.Id).Execute().Payload.Body.Data.Replace('-', '+').Replace('_', '/').PadRight(4 * ((service.Users.Messages.Get("me", message.Id).Execute().Payload.Body.Data.Length + 3) / 4), '='));
+                        byte[] bytes = Convert.FromBase64String(messageBody.Replace('-', '+').Replace('_', '/').PadRight(4 * ((messageBody.Length + 3) / 4), '='));
                         decodedString = Encoding.UTF8.GetString(bytes);
                     }
                     
@@ -74,21 +74,6 @@ namespace SaintSender.Core.Services
             {
                 Console.WriteLine("No message found");
             }
-            // List labels.
-            IList<Label> labels = request.Execute().Labels;
-            Console.WriteLine("Labels:");
-            if (labels != null && labels.Count > 0)
-            {
-                foreach (var labelItem in labels)
-                {
-                    Console.WriteLine("{0}", labelItem.Name);
-                }
-            }
-            else
-            {
-                Console.WriteLine("No labels found.");
-            }
-            Console.Read();
         }
     }
 }
