@@ -4,15 +4,64 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SaintSender.DesktopUI"
+        xmlns:views="clr-namespace:SaintSender.DesktopUI.Views"
+        xmlns:viewmodels="clr-namespace:SaintSender.DesktopUI.ViewModels"
         mc:Ignorable="d"
         Title="SainSender" Height="450" Width="800">
+
+    <Window.Resources>
+        <DataTemplate x:Name="AllMailList" DataType="{x:Type viewmodels:AllMailListViewModel}">
+             <views:AllMailList DataContext="{Binding}"/>
+        </DataTemplate>
+        
+        <DataTemplate x:Name="Folders" DataType="{x:Type viewmodels:FoldersViewModel}">
+             <views:Folders DataContext="{Binding}"/>
+        </DataTemplate>
+        
+        <DataTemplate x:Name="OneMail" DataType="{x:Type viewmodels:OneMailViewModel}">
+             <views:OneMail DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
+    
+
     <Grid>
-        <TextBox Name="NameTxt" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button Name="GreetBtn" Content="Greet" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="140,13,0,0" Command="{Binding GreetCommand}"/>
-        <TextBlock Name="ResultTxt" HorizontalAlignment="Left" Margin="10,45,0,0" FontSize="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-        <Button Name="Login" Content="Login" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding Sample}"></Button>
-        <Button Name="Logout" Content="Login" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding Logout}"></Button>
-        <DockPanel>
-        </DockPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <Button x:Name="SignInButton" Content="SignIn" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" Margin="3" BorderBrush="Aqua" Background="Azure" FontFamily="Comic Sans MS" FontSize="20"/>
+       
+
+
+
+        <ContentControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Content="{Binding}"/>
     </Grid>
+
+
+    <!--<Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="192*"/>
+            <ColumnDefinition Width="601*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Name="NameTxt" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Name="GreetBtn" Content="Greet" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="140,13,0,0" Command="{Binding GreetCommand}" Grid.ColumnSpan="2"/>
+        <TextBlock Name="ResultTxt" HorizontalAlignment="Left" Margin="10,45,0,0" FontSize="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <Button Name="Login" Content="Login" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding Sample}" Grid.Column="1" Margin="0,0,-0.4,0"></Button>
+        <Button Name="Logout" Content="Login" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding Logout}" Grid.Column="1" Margin="0,0,-0.4,0"></Button>
+        <DockPanel Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
+        </DockPanel>
+    </Grid>-->
 </Window>

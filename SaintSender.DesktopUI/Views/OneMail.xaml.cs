@@ -12,25 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SaintSender.Core.Services;
-using SaintSender.DesktopUI.ViewModels;
 
-namespace SaintSender.DesktopUI
+namespace SaintSender.DesktopUI.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for OneMail.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class OneMail : UserControl
     {
-        private readonly MainWinwowViewModel _mainWindowViewModel;
-
-        public MainWindow()
+        public OneMail()
         {
             InitializeComponent();
-            _mainWindowViewModel = new MainWinwowViewModel();
-           
-            this.DataContext = _mainWindowViewModel;
         }
-
     }
 }

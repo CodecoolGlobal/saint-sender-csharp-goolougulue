@@ -10,7 +10,7 @@ using SaintSender.DesktopUI.Command;
 
 namespace SaintSender.DesktopUI.ViewModels
 {
-    class MainWinwowViewModel
+    public class MainWinwowViewModel
     {
             
         private GreetService service = new GreetService();
