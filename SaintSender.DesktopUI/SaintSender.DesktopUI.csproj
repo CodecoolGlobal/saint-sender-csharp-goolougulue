@@ -78,8 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\AllMailListViewModel.cs" />
-    <Compile Include="ViewModels\FoldersViewModel.cs" />
+    <Compile Include="ViewModels\AllMailViewModel.cs" />
     <Compile Include="ViewModels\OneMailViewModel.cs" />
     <Compile Include="Views\OneMail.xaml.cs">
       <DependentUpon>OneMail.xaml</DependentUpon>

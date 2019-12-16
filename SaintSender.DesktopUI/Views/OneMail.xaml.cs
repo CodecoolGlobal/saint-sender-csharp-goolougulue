@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SaintSender.DesktopUI.Views
@@ -18,7 +17,7 @@ namespace SaintSender.DesktopUI.Views
     /// <summary>
     /// Interaction logic for OneMail.xaml
     /// </summary>
-    public partial class OneMail : UserControl
+    public partial class OneMail : Window
     {
         public OneMail()
         {

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SaintSender.DesktopUI.ViewModels
 {
-    public class AllMailListViewModel
+    public class AllMailViewModel
     {
-        public AllMailListViewModel()
+        public AllMailViewModel()
         {
         }
     }
