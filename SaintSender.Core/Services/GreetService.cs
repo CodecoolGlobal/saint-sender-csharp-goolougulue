@@ -23,7 +23,7 @@ namespace SaintSender.Core.Services
         static string[] Scopes = { GmailService.Scope.GmailReadonly };
         static string ApplicationName = "Gmail API .NET Quickstart";
 
-        static void Sample()
+        public static void Sample()
         {
             UserCredential credential;
 
