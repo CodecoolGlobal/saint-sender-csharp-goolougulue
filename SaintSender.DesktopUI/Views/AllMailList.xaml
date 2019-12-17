@@ -7,6 +7,33 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Column="0" Grid.Row="0" Grid.RowSpan="6" Background="Red" ItemsSource="{Binding Folders}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ListViewItem Content="{Binding Name}" DataContext="{Binding}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+        <ListView Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="5" Background="Green" Margin="5,0,-5,0">
+        </ListView>
     </Grid>
+
 </UserControl>

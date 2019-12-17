@@ -14,6 +14,11 @@ namespace SaintSender.Core.Services
 {
     public class GreetService : IGreetService
     {
+        public GreetService()
+        {
+            Sample();
+        }
+
         public string Greet(string name)
         {
             Sample();
@@ -22,8 +27,9 @@ namespace SaintSender.Core.Services
 
         static string[] Scopes = { GmailService.Scope.MailGoogleCom };
         static string ApplicationName = "Gmail API .NET Quickstart";
+        private GmailService _service;
 
-        public static void Sample()
+        public void Sample()
         {
             UserCredential credential;
 
@@ -49,31 +55,58 @@ namespace SaintSender.Core.Services
                 ApplicationName = ApplicationName,
             });
 
-            // Define parameters of request.
-            UsersResource.LabelsResource.ListRequest request = service.Users.Labels.List("me");
-            UsersResource.MessagesResource.ListRequest messageRequest = service.Users.Messages.List("me");
+            _service = service;
 
-            IList<Message> messages = messageRequest.Execute().Messages;
-            Console.WriteLine("Messages:");
-            if(messages != null && messages.Count >0)
-            {
-                foreach(var message in messages)
-                {
-                    var messageBody = service.Users.Messages.Get("me", message.Id).Execute().Payload.Body.Data;
-                    string decodedString = "";
-                    if (messageBody != null)
-                    {
-                        byte[] bytes = Convert.FromBase64String(messageBody.Replace('-', '+').Replace('_', '/').PadRight(4 * ((messageBody.Length + 3) / 4), '='));
-                        decodedString = Encoding.UTF8.GetString(bytes);
-                    }
-                    
-                    Console.WriteLine(decodedString);
-                    Console.WriteLine("{0}", message.Id);
-                }
-            }else
-            {
-                Console.WriteLine("No message found");
-            }
+
+
+
+            
         }
+
+        public IList<Label> GetMailFolder ()
+        {
+            UsersResource.LabelsResource.ListRequest request = _service.Users.Labels.List("me");
+
+            IList<Label> folders = request.Execute().Labels;
+
+            return folders;
+        }
+
+        public IList<Message> GetMails (string folderId)
+        {
+            UsersResource.MessagesResource.ListRequest messageRequest = _service.Users.Messages.List("me");
+
+            IList<Message> fullMessages = new List<Message>();
+            IList<Message> messages = messageRequest.Execute().Messages;
+
+            if (messages != null && messages.Count > 0)
+            {
+                foreach (var message in messages)
+                {
+                    var folderIds = _service.Users.Messages.Get("me", message.Id).Execute().LabelIds;
+                    if (folderIds.Contains(folderId))
+                    {
+                        fullMessages.Add(message);
+                    }
+                }
+            }
+
+            return fullMessages;
+        }
+
+        private string DecodeMessageBody (Message message)
+        {
+            var messageBody = _service.Users.Messages.Get("me", message.Id).Execute().Payload.Body.Data;
+
+            string decodedString = "";
+            if (messageBody != null)
+            {
+                byte[] bytes = Convert.FromBase64String(messageBody.Replace('-', '+').Replace('_', '/').PadRight(4 * ((messageBody.Length + 3) / 4), '='));
+                decodedString = Encoding.UTF8.GetString(bytes);
+            }
+
+            return decodedString;
+        }
+
     }
 }

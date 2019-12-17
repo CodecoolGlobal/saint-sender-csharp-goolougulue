@@ -32,5 +32,11 @@ namespace SaintSender.DesktopUI
             this.DataContext = _mainWindowViewModel;
         }
 
+        private void SignInButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button signInBtn = (Button)sender;
+            signInBtn.Visibility = Visibility.Collapsed;
+            this.DataContext = new AllMailViewModel();
+        }
     }
 }

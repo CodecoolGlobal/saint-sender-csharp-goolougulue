@@ -34,12 +34,12 @@
         </Grid.RowDefinitions>
 
 
-        <Button x:Name="SignInButton" Content="SignIn" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" Margin="3" BorderBrush="Aqua" Background="Azure" FontFamily="Comic Sans MS" FontSize="20"/>
-       
+        <Button Panel.ZIndex="1" x:Name="SignInButton" Content="SignIn" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" Margin="3" BorderBrush="Aqua" Background="Azure" FontFamily="Comic Sans MS" FontSize="20" Command="{Binding GreetCommand}" Click="SignInButton_Click"/>
 
 
 
-        <ContentControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Content="{Binding}"/>
+
+        <ContentControl Panel.ZIndex="0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Content="{Binding}"/>
     </Grid>
 
 

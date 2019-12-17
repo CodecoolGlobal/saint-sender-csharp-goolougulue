@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaintSender.DesktopUI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,16 @@ namespace SaintSender.DesktopUI.Views
     /// </summary>
     public partial class AllMailList : UserControl
     {
+        private AllMailViewModel _viewModel;
+
+
         public AllMailList()
         {
             InitializeComponent();
+            _viewModel = new AllMailViewModel();
+
+            this.DataContext = _viewModel;
+
         }
     }
 }
