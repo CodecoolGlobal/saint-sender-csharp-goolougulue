@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using Google.Apis.Auth.OAuth2;
@@ -14,9 +16,16 @@ namespace SaintSender.Core.Services
 {
     public class GreetService : IGreetService
     {
+        private ObservableCollection<Message> _messages = new ObservableCollection<Message>();
         public GreetService()
         {
             Sample();
+        }
+
+        public GreetService(ObservableCollection<Message> list)
+        {
+            Sample();
+            _messages = list;
         }
 
         public string Greet(string name)
@@ -56,11 +65,6 @@ namespace SaintSender.Core.Services
             });
 
             _service = service;
-
-
-
-
-            
         }
 
         public IList<Label> GetMailFolder ()
@@ -69,13 +73,20 @@ namespace SaintSender.Core.Services
 
             IList<Label> folders = request.Execute().Labels;
 
-            return folders;
+            IEnumerable<Label> sortedFolders = folders.OrderBy(f => f.Name);
+            IList<Label> sortedList = sortedFolders.ToList();
+            IEnumerable<Label> inboxSearch = sortedList.Where(label => label.Name == "INBOX");
+            Label inbox = inboxSearch.First();
+            sortedList.Remove(inbox);
+            sortedList.Insert(0, inbox);
+
+            return sortedList;
         }
 
         public IList<Message> GetMails (string folderId)
         {
+            _messages.Clear();
             UsersResource.MessagesResource.ListRequest messageRequest = _service.Users.Messages.List("me");
-
             IList<Message> fullMessages = new List<Message>();
             IList<Message> messages = messageRequest.Execute().Messages;
 
@@ -86,7 +97,12 @@ namespace SaintSender.Core.Services
                     var folderIds = _service.Users.Messages.Get("me", message.Id).Execute().LabelIds;
                     if (folderIds.Contains(folderId))
                     {
+                        _messages.Add(message);
                         fullMessages.Add(message);
+                        if(_messages.Count > 0)
+                        {
+                            break;
+                        }
                     }
                 }
             }

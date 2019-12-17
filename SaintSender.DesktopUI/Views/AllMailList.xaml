@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -32,7 +32,12 @@
 
         </ListView>
 
-        <ListView Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="5" Background="Green" Margin="5,0,-5,0">
+        <ListView Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="5" Background="Green" Margin="5,0,-5,0" ItemsSource="{Binding Mails}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ListViewItem Content="{Binding Id}" DataContext="{Binding}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 
