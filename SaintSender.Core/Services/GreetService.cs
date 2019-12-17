@@ -20,7 +20,7 @@ namespace SaintSender.Core.Services
             return $"Welcome {name}, my friend!";
         }
 
-        static string[] Scopes = { GmailService.Scope.GmailReadonly };
+        static string[] Scopes = { GmailService.Scope.MailGoogleCom };
         static string ApplicationName = "Gmail API .NET Quickstart";
 
         public static void Sample()
