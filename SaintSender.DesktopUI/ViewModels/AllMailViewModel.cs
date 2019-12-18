@@ -1,4 +1,5 @@
 ﻿using Google.Apis.Gmail.v1.Data;
+using SaintSender.Core.Entities;
 using SaintSender.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,8 @@ namespace SaintSender.DesktopUI.ViewModels
             Service.GetMails("INBOX", Mails, _itemsLock);
             foreach (var item in Mails)
             {
-                Console.WriteLine(item.Id);
+                SerializableMessage msg = new SerializableMessage(item);
+                msg.SerializeMessage();
             }
 
         } 

@@ -94,7 +94,7 @@ namespace SaintSender.Core.Services
                         {
                             _messages.Add(_service.Users.Messages.Get("me", message.Id).Execute());
                         }
-                        if(_messages.Count > 20)
+                        if(_messages.Count > 5)
                         {
                             break;
                         }
