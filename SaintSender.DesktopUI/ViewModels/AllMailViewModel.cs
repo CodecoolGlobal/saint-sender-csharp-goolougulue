@@ -19,7 +19,13 @@ namespace SaintSender.DesktopUI.ViewModels
         {
             Service = new GreetService();
             Folders = ShowFolders();
-            Task getMails = Task.Factory.StartNew(() => Mails = ShowMails());
+            //Task getMails = Task.Factory.StartNew(() => ShowMails());
+            GetEMails();
+        }    
+
+        private async Task GetEMails()
+        {
+            await ShowMails();
         }
 
         public IList<Label> ShowFolders()
@@ -27,10 +33,14 @@ namespace SaintSender.DesktopUI.ViewModels
             return Service.GetMailFolder();
         }
 
-        public ObservableCollection<Message> ShowMails()
+        public Task ShowMails()
         {
-            ObservableCollection<Message> messages = new ObservableCollection<Message>(Service.GetMails("INBOX").ToList());
-            return messages;
-        }
+            Service.GetMails("INBOX", Mails);
+            foreach (var item in Mails)
+            {
+                Console.WriteLine(item.Id);
+            }
+            return null;
+        } 
     }
 }

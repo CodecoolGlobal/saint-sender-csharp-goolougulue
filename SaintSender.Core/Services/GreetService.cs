@@ -16,18 +16,12 @@ namespace SaintSender.Core.Services
 {
     public class GreetService : IGreetService
     {
-        private ObservableCollection<Message> _messages = new ObservableCollection<Message>();
         public GreetService()
         {
             Sample();
         }
 
-        public GreetService(ObservableCollection<Message> list)
-        {
-            Sample();
-            _messages = list;
-        }
-
+        
         public string Greet(string name)
         {
             Sample();
@@ -83,11 +77,10 @@ namespace SaintSender.Core.Services
             return sortedList;
         }
 
-        public IList<Message> GetMails (string folderId)
+        public void GetMails (string folderId,ObservableCollection<Message> _messages)
         {
-            _messages.Clear();
+            //_messages.Clear();
             UsersResource.MessagesResource.ListRequest messageRequest = _service.Users.Messages.List("me");
-            IList<Message> fullMessages = new List<Message>();
             IList<Message> messages = messageRequest.Execute().Messages;
 
             if (messages != null && messages.Count > 0)
@@ -97,9 +90,9 @@ namespace SaintSender.Core.Services
                     var folderIds = _service.Users.Messages.Get("me", message.Id).Execute().LabelIds;
                     if (folderIds.Contains(folderId))
                     {
-                        _messages.Add(message);
-                        fullMessages.Add(message);
-                        if(_messages.Count > 0)
+                        _messages.Add(_service.Users.Messages.Get("me", message.Id).Execute());
+                        
+                        if(_messages.Count > 20)
                         {
                             break;
                         }
@@ -107,7 +100,7 @@ namespace SaintSender.Core.Services
                 }
             }
 
-            return fullMessages;
+            
         }
 
         private string DecodeMessageBody (Message message)

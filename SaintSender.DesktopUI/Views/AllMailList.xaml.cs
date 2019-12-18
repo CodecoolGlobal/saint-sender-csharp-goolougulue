@@ -21,15 +21,12 @@ namespace SaintSender.DesktopUI.Views
     /// </summary>
     public partial class AllMailList : UserControl
     {
-        private AllMailViewModel _viewModel;
 
 
         public AllMailList()
         {
             InitializeComponent();
-            _viewModel = new AllMailViewModel();
 
-            this.DataContext = _viewModel;
 
         }
     }
