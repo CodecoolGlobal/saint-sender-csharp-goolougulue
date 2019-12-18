@@ -21,15 +21,10 @@ namespace SaintSender.DesktopUI.Converters
             var allHeaders = msgPart.Headers;
 
 
-            foreach (var item in allHeaders)
-            {
-                if (item.Name == "Subject")
-                {
-                    return item.Value;
-                }
-            }
+            var item = allHeaders.FirstOrDefault(header => header.Name == "Subject");
 
-            return null;
+          
+            return item.Value;
 
         }
 
