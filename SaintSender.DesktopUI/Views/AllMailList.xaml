@@ -33,11 +33,16 @@
         </ListView>
 
         <ListView Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="5" Background="Green" Margin="5,0,-5,0" ItemsSource="{Binding Mails}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ListViewItem Content="{Binding Id}" DataContext="{Binding}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="140" Header="Id: "
+                        DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Width="140" Header="Snippet: "
+                        DisplayMemberBinding="{Binding Snippet}" />
+                    <GridViewColumn Width="140" Header="Raw: "
+                        DisplayMemberBinding="{Binding Raw}" />
+                </GridView>
+            </ListView.View>
         </ListView>
     </Grid>
 
