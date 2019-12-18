@@ -77,7 +77,7 @@ namespace SaintSender.Core.Services
             return sortedList;
         }
 
-        public void GetMails (string folderId,ObservableCollection<Message> _messages)
+        public void GetMails (string folderId,ObservableCollection<Message> _messages, object _itemslock)
         {
             //_messages.Clear();
             UsersResource.MessagesResource.ListRequest messageRequest = _service.Users.Messages.List("me");
@@ -90,8 +90,10 @@ namespace SaintSender.Core.Services
                     var folderIds = _service.Users.Messages.Get("me", message.Id).Execute().LabelIds;
                     if (folderIds.Contains(folderId))
                     {
-                        _messages.Add(_service.Users.Messages.Get("me", message.Id).Execute());
-                        
+                        lock (_itemslock)
+                        {
+                            _messages.Add(_service.Users.Messages.Get("me", message.Id).Execute());
+                        }
                         if(_messages.Count > 20)
                         {
                             break;

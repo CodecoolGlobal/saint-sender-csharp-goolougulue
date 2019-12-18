@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace SaintSender.DesktopUI.ViewModels
 {
@@ -14,33 +15,33 @@ namespace SaintSender.DesktopUI.ViewModels
         public ObservableCollection<Message> Mails { get; private set; }
         public IList<Label> Folders { get; private set; }
         public GreetService Service { get; private set; }
+        public object _itemsLock = new object ();
 
         public AllMailViewModel()
         {
             Service = new GreetService();
             Folders = ShowFolders();
-            //Task getMails = Task.Factory.StartNew(() => ShowMails());
-            GetEMails();
+            Mails = new ObservableCollection<Message>();
+            Task getMails = Task.Factory.StartNew(()=>ShowMails());
+
+            BindingOperations.EnableCollectionSynchronization(Mails, _itemsLock);
+
         }    
 
-        private async Task GetEMails()
-        {
-            await ShowMails();
-        }
 
         public IList<Label> ShowFolders()
         {
             return Service.GetMailFolder();
         }
 
-        public Task ShowMails()
+        public void ShowMails()
         {
-            Service.GetMails("INBOX", Mails);
+            Service.GetMails("INBOX", Mails, _itemsLock);
             foreach (var item in Mails)
             {
                 Console.WriteLine(item.Id);
             }
-            return null;
+
         } 
     }
 }
