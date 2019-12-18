@@ -24,11 +24,17 @@
         </Grid.RowDefinitions>
 
         <ListView Grid.Column="0" Grid.Row="0" Grid.RowSpan="6" Background="Red" ItemsSource="{Binding Folders}">
-            <ListView.ItemTemplate>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="140" Header="Mail Folder" DisplayMemberBinding="{Binding Name}" />
+                </GridView>
+            </ListView.View>
+            
+            <!--<ListView.ItemTemplate>
                 <DataTemplate>
                     <ListViewItem Content="{Binding Name}" DataContext="{Binding}"/>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </ListView.ItemTemplate>-->
 
         </ListView>
 
