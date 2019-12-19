@@ -15,14 +15,27 @@ using System.Windows.Shapes;
 namespace SaintSender.DesktopUI.Views
 {
     /// <summary>
-    /// Interaction logic for LoginPopup.xaml
+    /// Interaction logic for AreYouSure.xaml
     /// </summary>
-    public partial class LoginPopup : Window
+    public partial class AreYouSure : Window
     {
-        public LoginPopup()
+
+        public Window ParentWindow { get; set; }
+        public AreYouSure()
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            ParentWindow.Close();
         }
     }
 }

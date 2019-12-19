@@ -28,6 +28,7 @@ namespace SaintSender.DesktopUI
         public MainWindow()
         {
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _mainWindowViewModel = new MainWinwowViewModel();
            
             this.DataContext = _mainWindowViewModel;

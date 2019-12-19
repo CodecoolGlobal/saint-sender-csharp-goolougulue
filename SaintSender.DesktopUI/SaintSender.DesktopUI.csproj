@@ -83,6 +83,9 @@
     <Compile Include="ViewModels\AllMailViewModel.cs" />
     <Compile Include="ViewModels\MailSenderViewModel.cs" />
     <Compile Include="ViewModels\OneMailViewModel.cs" />
+    <Compile Include="Views\AreYouSure.xaml.cs">
+      <DependentUpon>AreYouSure.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginPopup.xaml.cs">
       <DependentUpon>LoginPopup.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,10 @@
       <DependentUpon>OneMail.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AllMailList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AreYouSure.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

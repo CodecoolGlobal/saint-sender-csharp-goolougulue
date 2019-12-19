@@ -2,6 +2,7 @@
 using SaintSender.Core.Entities;
 using SaintSender.Core.Services;
 using SaintSender.DesktopUI.Command;
+using SaintSender.DesktopUI.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +20,9 @@ namespace SaintSender.DesktopUI.ViewModels
         public ObservableCollection<Message> Mails { get; private set; }
         public IList<Label> Folders { get; private set; }
         public GreetService Service { get; private set; }
+        public ICommand GetMailsCommand { get; private set; }
+        public ICommand OpenSend { get; private set; }
+
         public object _itemsLock = new object ();
 
         public AllMailViewModel()
@@ -32,7 +36,14 @@ namespace SaintSender.DesktopUI.ViewModels
                 (obj) => { return true; },
                 (obj) => Mails.ToList().ForEach((item) => SaveMails(item))
                 );
-
+            GetMailsCommand = new Commands((obj) => { return true; }, (obj) => {
+                new GreetService();
+            });
+            OpenSend = new Commands((obj) => { return true; }, (obj) =>
+            {
+                MailSender sender = new MailSender();
+                sender.Show();
+            });
         }
 
 

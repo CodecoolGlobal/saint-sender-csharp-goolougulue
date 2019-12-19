@@ -1,0 +1,15 @@
+﻿<Window x:Class="SaintSender.DesktopUI.Views.AreYouSure"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SaintSender.DesktopUI.Views"
+        mc:Ignorable="d"
+        Title="AreYouSure" Height="200" Width="500">
+    <Grid>
+        <Label Content="Are you sure to discard this message?" HorizontalAlignment="Left" Margin="150,30,0,0" VerticalAlignment="Top"/>
+        <Button Content="Yes" HorizontalAlignment="Left" Margin="127,121,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Button Content="No" HorizontalAlignment="Left" Margin="301,121,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
+    </Grid>
+</Window>

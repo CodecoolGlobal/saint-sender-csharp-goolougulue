@@ -23,6 +23,7 @@ namespace SaintSender.DesktopUI.Views
         public Folders()
         {
             InitializeComponent();
+
         }
     }
 }

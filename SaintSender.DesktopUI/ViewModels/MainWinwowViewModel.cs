@@ -12,11 +12,10 @@ namespace SaintSender.DesktopUI.ViewModels
 {
     public class MainWinwowViewModel
     {
-        public ICommand GreetCommand { get; private set; }
 
         public MainWinwowViewModel()
         {
-            GreetCommand = new Commands((obj) => { return true; }, (obj) => { new GreetService();  });
+            
         }
     }
 }

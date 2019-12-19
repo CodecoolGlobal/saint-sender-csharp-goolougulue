@@ -52,6 +52,7 @@
 
         <DockPanel Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="5" Background="Sienna" Margin="3">
             <Button x:Name="SaveEmails" Content="Save Emails" HorizontalAlignment="Left" Background="Aqua" Padding="2" Command="{Binding SaveEmails}"></Button>
+            <Button Name="SendMail" Content="+" Height="30" Width="30" HorizontalAlignment="Right" Background="Aqua" Padding="2" Command="{Binding OpenSend}"></Button>
         </DockPanel>
     </Grid>
 

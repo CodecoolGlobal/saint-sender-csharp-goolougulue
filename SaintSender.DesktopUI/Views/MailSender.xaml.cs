@@ -25,6 +25,7 @@ namespace SaintSender.DesktopUI.Views
         public MailSender()
         {
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _mailSender = new MailSenderViewModel();
 
             this.DataContext = _mailSender;
@@ -32,7 +33,9 @@ namespace SaintSender.DesktopUI.Views
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            AreYouSure askWindow = new AreYouSure();
+            askWindow.ParentWindow = this;
+            askWindow.Show();
         }
     }
 }

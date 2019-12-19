@@ -34,26 +34,12 @@
         </Grid.RowDefinitions>
 
 
-        <Button Panel.ZIndex="1" x:Name="SignInButton" Content="SignIn" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" Margin="3" BorderBrush="Aqua" Background="Azure" FontFamily="Comic Sans MS" FontSize="20" Command="{Binding GreetCommand}" Click="SignInButton_Click"/>
+        <Button Panel.ZIndex="1" x:Name="SignInButton" Content="SignIn" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" Margin="3" BorderBrush="Aqua" Background="Azure" FontFamily="Comic Sans MS" FontSize="20" Command="{Binding GetMailsCommand}" Click="SignInButton_Click"/>
 
 
 
 
-        <ContentControl Panel.ZIndex="0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5"/>
+        <ContentControl Panel.ZIndex="0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Content="{Binding}">
+        </ContentControl>
     </Grid>
-
-
-    <!--<Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="192*"/>
-            <ColumnDefinition Width="601*"/>
-        </Grid.ColumnDefinitions>
-        <TextBox Name="NameTxt" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button Name="GreetBtn" Content="Greet" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="140,13,0,0" Command="{Binding GreetCommand}" Grid.ColumnSpan="2"/>
-        <TextBlock Name="ResultTxt" HorizontalAlignment="Left" Margin="10,45,0,0" FontSize="28" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-        <Button Name="Login" Content="Login" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding Sample}" Grid.Column="1" Margin="0,0,-0.4,0"></Button>
-        <Button Name="Logout" Content="Login" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding Logout}" Grid.Column="1" Margin="0,0,-0.4,0"></Button>
-        <DockPanel Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
-        </DockPanel>
-    </Grid>-->
 </Window>
