@@ -1,4 +1,5 @@
-﻿using SaintSender.DesktopUI.ViewModels;
+﻿using Google.Apis.Gmail.v1.Data;
+using SaintSender.DesktopUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,13 @@ namespace SaintSender.DesktopUI.Views
             InitializeComponent();
 
 
+        }
+
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var mails = (ListView)sender;
+            OneMail selectedMailWindow = new OneMail((Message)mails.SelectedItem);
+            selectedMailWindow.Show();
         }
     }
 }

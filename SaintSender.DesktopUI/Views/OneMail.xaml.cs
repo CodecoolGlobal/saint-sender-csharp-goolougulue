@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Google.Apis.Gmail.v1.Data;
+using SaintSender.DesktopUI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,20 @@ namespace SaintSender.DesktopUI.Views
     /// </summary>
     public partial class OneMail : Window
     {
+        private OneMailViewModel OneMailView;
+        public OneMail(Message mailMessage) 
+        {
+            InitializeComponent();
+            OneMailView = new OneMailViewModel(mailMessage);
+            this.DataContext = OneMailView;
+
+
+        }
+
         public OneMail()
         {
             InitializeComponent();
+
         }
     }
 }

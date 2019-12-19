@@ -17,8 +17,9 @@ namespace SaintSender.Core.Entities
 
         public static void SerializeMessage(Message originalMsg)
         {
+            string path = Path.Combine(Environment.CurrentDirectory, @"SavedEmails\", $"{originalMsg.Id}.dat");
             JsonSerializer jsonSerializer = new JsonSerializer();
-            using (StreamWriter txtwriter = File.CreateText($"C:\\Users\\Main\\Desktop\\Codecool_Advanced\\tw_3\\SaintSender\\SaintSender.Core\\SavedMessages\\{originalMsg.Id}.dat"))
+            using (StreamWriter txtwriter = File.CreateText(path))
             {
                 jsonSerializer.Serialize(txtwriter, originalMsg);
             }
@@ -26,9 +27,10 @@ namespace SaintSender.Core.Entities
 
         public static Message Deserialize(string msgId)
         {
+            string path = Path.Combine(Environment.CurrentDirectory, @"SavedEmails\", $"{msgId}.dat");
             Message msg = new Message();
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-            using (Stream fs = File.Open($"C:\\Users\\Main\\Desktop\\Codecool_Advanced\\tw_3\\Serialization\\Serialisation\\SavedObjects\\{msgId}.dat", FileMode.Open))
+            using (Stream fs = File.Open(path, FileMode.Open))
             {
                 msg = (Message)binaryFormatter.Deserialize(fs);
             }

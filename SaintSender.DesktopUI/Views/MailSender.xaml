@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SaintSender.DesktopUI.Views"
         xmlns:Converters="clr-namespace:SaintSender.DesktopUI.Converters"
+        x:Name="SendWindow"
         mc:Ignorable="d"
         Title="MailSender" Height="450" Width="800">
 
@@ -25,14 +26,8 @@
             <TextBox Name="Message" HorizontalAlignment="Left" Height="203" Margin="10,136,0,0" TextWrapping="Wrap" Text="{Binding Path=Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="772"/>
         </Grid>
         <Grid Name="Buttons" Grid.Row="1">
-            <Button Name="Send" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="120" Margin="505,10,0,0" Content="Send" Command="{Binding SendCommand}">
-                <Button.CommandParameter>
-                    <MultiBinding Converter="{StaticResource MyMultiConverter}">
-                        <Binding Path="DataContext.To" ElementName="To"></Binding>
-                        <Binding Path="DataContext.Subject" ElementName="Subject"/>
-                        <Binding Path="DataContext.Message" ElementName="Message"/>
-                    </MultiBinding>
-                </Button.CommandParameter>
+            <Button Name="Send" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="120" Margin="505,10,0,0" Content="Send" Command="{Binding SendCommand}" CommandParameter="{Binding ElementName=SendWindow}">
+                
             </Button>
             
             <Button Name="Cancel" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="120" Margin="0,10,10,0" Content="Cancel" Click="Cancel_Click"></Button>

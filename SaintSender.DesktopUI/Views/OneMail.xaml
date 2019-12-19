@@ -4,9 +4,51 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SaintSender.DesktopUI.Views"
-        mc:Ignorable="d"
+        xmlns:Converters="clr-namespace:SaintSender.DesktopUI.Converters"
+        mc:Ignorable="d" Style="{DynamicResource StyleOfWindow}"
         Title="OneMail" Height="450" Width="800">
+   
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <Converters:MessagePartSubjectConvert x:Key="MessagePartSubjectConvert"/>
+            <Converters:InternalTimeConvert x:Key="InternalTimeConvert"/>
+            <Converters:MessageSenderConvert x:Key="MessageSenderConvert"/>
+            <Converters:MessageConvert x:Key="MessageConvert"/>
+            <Style x:Key="RequiredLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontStyle" Value="Italic"/>
+            </Style>
+            <Style x:Key="StyleOfWindow" TargetType="{x:Type Window}">
+                <Setter Property="Background" Value="Green"></Setter>
+            </Style>
+            <Style x:Key="MessageText" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="14"></Setter>
+                <Setter Property="Foreground" Value="DarkRed"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontStyle" Value="Italic"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Label Name="From" Margin="10,0,0,0" HorizontalAlignment="Left"  Height="30"  Content="{Binding From, Converter={StaticResource MessageSenderConvert}}" Style="{StaticResource RequiredLabel}"></Label>
+            <Label Name="When" Margin="0,0,10,0" HorizontalAlignment="Right" Height="30"   RenderTransformOrigin="0.502,0.537" Content="{Binding When, Converter={StaticResource InternalTimeConvert}}" Style="{StaticResource RequiredLabel}"></Label>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Label Name="Subject" Margin="10,0,0,0" HorizontalAlignment="Left" Height="30" Content="{Binding Subject,Converter={StaticResource MessagePartSubjectConvert}}" Style="{StaticResource RequiredLabel}"></Label>
+        </Grid>
+        <Grid Grid.Row="2">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <TextBlock Name="Message" Margin="10,0,10,0" HorizontalAlignment="Center" Width="750"    VerticalAlignment="Bottom"   Text="{Binding Message, Converter={StaticResource MessageConvert}}" Style="{StaticResource MessageText}"></TextBlock>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>
