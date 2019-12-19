@@ -87,36 +87,58 @@ namespace SaintSender.Core.Services
             {
                 foreach (var message in messages)
                 {
-                    var folderIds = _service.Users.Messages.Get("me", message.Id).Execute().LabelIds;
+                    var fullMessage = _service.Users.Messages.Get("me", message.Id).Execute();
+                    var folderIds = fullMessage.LabelIds;
                     if (folderIds.Contains(folderId))
                     {
                         lock (_itemslock)
                         {
-                            _messages.Add(_service.Users.Messages.Get("me", message.Id).Execute());
+                            _messages.Add(fullMessage);
                         }
-                        if(_messages.Count > 5)
+                        var raw = DecodeMessageBody(fullMessage);
+                        if(_messages.Count > 20)
                         {
                             break;
                         }
                     }
                 }
             }
-
-            
-        }
+         }
 
         private string DecodeMessageBody (Message message)
         {
-            var messageBody = _service.Users.Messages.Get("me", message.Id).Execute().Payload.Body.Data;
-
+            var messageBody = message.Payload.Body.Data;
             string decodedString = "";
+            IList<MessagePart> messageBodyParts;
+
+            Console.WriteLine(message.Id);
             if (messageBody != null)
             {
-                byte[] bytes = Convert.FromBase64String(messageBody.Replace('-', '+').Replace('_', '/').PadRight(4 * ((messageBody.Length + 3) / 4), '='));
-                decodedString = Encoding.UTF8.GetString(bytes);
+                decodedString = Decode(messageBody);
+
+
+                return decodedString;
             }
+            
+            messageBodyParts = message.Payload.Parts;
+            foreach (var messagePart in messageBodyParts)
+            {
+                if (messagePart.Body.Data != null)
+                {
+                    decodedString += Decode(messagePart.Body.Data);
+                }
+                decodedString.Append('\n');
+            }
+            Console.WriteLine(decodedString);
 
             return decodedString;
+            
+        }
+
+        private string Decode (string code)
+        {
+            byte[] bytes = Convert.FromBase64String(code.Replace('-', '+').Replace('_', '/').PadRight(4 * ((code.Length + 3) / 4), '='));
+            return Encoding.UTF8.GetString(bytes);
         }
 
     }
