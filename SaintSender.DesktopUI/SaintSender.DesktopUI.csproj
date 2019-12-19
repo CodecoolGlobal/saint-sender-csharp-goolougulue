@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\InternalTimeConvert.cs" />
     <Compile Include="Converters\MessagePartSubjectConvert.cs" />
     <Compile Include="ViewModels\AllMailViewModel.cs" />
     <Compile Include="ViewModels\OneMailViewModel.cs" />

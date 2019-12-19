@@ -10,7 +10,9 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Converters:MessagePartSubjectConvert x:Key="MessagePartSubjectConvert"/>
+        <Converters:InternalTimeConvert x:Key="InternalTimeConvert"/>
     </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*"/>
@@ -52,6 +54,7 @@
                         DisplayMemberBinding="{Binding Snippet}" />
                     <GridViewColumn Width="140" Header="Email Subject: "
                         DisplayMemberBinding="{Binding Payload, Converter={StaticResource MessagePartSubjectConvert}}" />
+                    <GridViewColumn Width="140" Header="Time:" DisplayMemberBinding="{Binding InternalDate,Converter={StaticResource InternalTimeConvert}}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
