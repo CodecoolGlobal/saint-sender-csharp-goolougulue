@@ -79,6 +79,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\InternalTimeConvert.cs" />
+    <Compile Include="Converters\MessageConvert.cs" />
     <Compile Include="Converters\MessagePartSubjectConvert.cs" />
     <Compile Include="Converters\MessageSenderConvert.cs" />
     <Compile Include="ViewModels\AllMailViewModel.cs" />
