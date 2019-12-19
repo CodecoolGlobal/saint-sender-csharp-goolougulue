@@ -25,7 +25,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="0.4*"/>
         </Grid.RowDefinitions>
 
         <ListView Grid.Column="0" Grid.Row="0" Grid.RowSpan="6" Background="Red" ItemsSource="{Binding Folders}">
@@ -35,15 +35,9 @@
                 </GridView>
             </ListView.View>
 
-            <!--<ListView.ItemTemplate>
-                <DataTemplate>
-                    <ListViewItem Content="{Binding Name}" DataContext="{Binding}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>-->
-
         </ListView>
 
-        <ListView Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="5" Background="Green" Margin="5,0,-5,0" ItemsSource="{Binding Mails}">
+        <ListView Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="5" Background="Green" Margin="5,0,-5,0" ItemsSource="{Binding Mails}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="140" Header="Id: "
@@ -55,6 +49,10 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <DockPanel Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="5" Background="Sienna" Margin="3">
+            <Button x:Name="SaveEmails" Content="Save Emails" HorizontalAlignment="Left" Background="Aqua" Padding="2" Command="{Binding SaveEmails}"></Button>
+        </DockPanel>
     </Grid>
 
 </UserControl>
