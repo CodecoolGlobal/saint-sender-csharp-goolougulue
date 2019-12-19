@@ -12,6 +12,19 @@
         <Converters:MessagePartSubjectConvert x:Key="MessagePartSubjectConvert"/>
         <Converters:InternalTimeConvert x:Key="InternalTimeConvert"/>
         <Converters:MessageSenderConvert x:Key="MessageSenderConvert"/>
+        <Style x:Key="Folders" TargetType="ListView">
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+        </Style>
+        <Style x:Key="PropertyAndName" TargetType="ListView">
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            
+        </Style>
     </UserControl.Resources>
     
     <Grid>
@@ -31,7 +44,7 @@
             <RowDefinition Height="0.4*"/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Column="0" Grid.Row="0" Grid.RowSpan="6" Background="Red" ItemsSource="{Binding Folders}">
+        <ListView Grid.Column="0" Grid.Row="0" Grid.RowSpan="6" Background="Red" ItemsSource="{Binding Folders}" Style="{StaticResource Folders}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="140" Header="Mail Folder" DisplayMemberBinding="{Binding Name}" />
@@ -40,7 +53,7 @@
 
         </ListView>
 
-        <ListView Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="5" Background="Green" Margin="5,0,-5,0" ItemsSource="{Binding Mails}" MouseDoubleClick="ListView_MouseDoubleClick">
+        <ListView Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="5" Background="Green" Margin="5,0,-5,0" ItemsSource="{Binding Mails}" MouseDoubleClick="ListView_MouseDoubleClick" Style="{StaticResource PropertyAndName}">
             
             <ListView.View>
                 <GridView>
