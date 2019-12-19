@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SaintSender.Core.Services;
 using SaintSender.DesktopUI.ViewModels;
+using SaintSender.DesktopUI.Views;
 
 namespace SaintSender.DesktopUI
 {
@@ -30,6 +31,8 @@ namespace SaintSender.DesktopUI
             _mainWindowViewModel = new MainWinwowViewModel();
            
             this.DataContext = _mainWindowViewModel;
+
+            
         }
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
@@ -37,6 +40,13 @@ namespace SaintSender.DesktopUI
             Button signInBtn = (Button)sender;
             signInBtn.Visibility = Visibility.Collapsed;
             this.DataContext = new AllMailViewModel();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MailSender send = new MailSender();
+            send.Show();
+            this.Close();
         }
     }
 }

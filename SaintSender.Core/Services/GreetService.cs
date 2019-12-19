@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading;
 using Google.Apis.Auth.OAuth2;
@@ -10,6 +11,7 @@ using Google.Apis.Gmail.v1;
 using Google.Apis.Gmail.v1.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using SaintSender.Core.Entities;
 using SaintSender.Core.Interfaces;
 
 namespace SaintSender.Core.Services
@@ -19,13 +21,6 @@ namespace SaintSender.Core.Services
         public GreetService()
         {
             Sample();
-        }
-
-        
-        public string Greet(string name)
-        {
-            Sample();
-            return $"Welcome {name}, my friend!";
         }
 
         static string[] Scopes = { GmailService.Scope.MailGoogleCom };
@@ -95,7 +90,6 @@ namespace SaintSender.Core.Services
                         {
                             _messages.Add(fullMessage);
                         }
-                        var raw = DecodeMessageBody(fullMessage);
                         if(_messages.Count > 20)
                         {
                             break;
@@ -105,41 +99,45 @@ namespace SaintSender.Core.Services
             }
          }
 
-        private string DecodeMessageBody (Message message)
+        public void SendEmail(CostumMail email)
         {
-            var messageBody = message.Payload.Body.Data;
-            string decodedString = "";
-            IList<MessagePart> messageBodyParts;
+            MessageCoding coder = new MessageCoding();
+            var mailMessage = MakeMessage(email);
 
-            Console.WriteLine(message.Id);
-            if (messageBody != null)
+            var mimeMessage = MimeKit.MimeMessage.CreateFromMailMessage(mailMessage);
+
+            var gmailMessage = new Google.Apis.Gmail.v1.Data.Message
             {
-                decodedString = Decode(messageBody);
+                Raw = coder.Encode(mimeMessage.ToString())
+            };
 
+            UsersResource.MessagesResource.SendRequest request = _service.Users.Messages.Send(gmailMessage, "me");
 
-                return decodedString;
-            }
-            
-            messageBodyParts = message.Payload.Parts;
-            foreach (var messagePart in messageBodyParts)
-            {
-                if (messagePart.Body.Data != null)
-                {
-                    decodedString += Decode(messagePart.Body.Data);
-                }
-                decodedString.Append('\n');
-            }
-            Console.WriteLine(decodedString);
-
-            return decodedString;
-            
+            request.Execute();
         }
 
-        private string Decode (string code)
+        public MailMessage MakeMessage(CostumMail email)
         {
-            byte[] bytes = Convert.FromBase64String(code.Replace('-', '+').Replace('_', '/').PadRight(4 * ((code.Length + 3) / 4), '='));
-            return Encoding.UTF8.GetString(bytes);
+            var mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress(address: email.FromAddress);
+            mailMessage.To.Add(email.ToRecipients);
+            mailMessage.ReplyToList.Add(email.FromAddress);
+            mailMessage.Subject = email.Subject;
+            mailMessage.Body = email.Body;
+            mailMessage.IsBodyHtml = email.IsHtml;
+
+
+            foreach (Attachment attachment in email.Attachments)
+            {
+                mailMessage.Attachments.Add(attachment);
+            }
+
+            return mailMessage;
         }
 
+        public string Greet(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

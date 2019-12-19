@@ -12,22 +12,11 @@ namespace SaintSender.DesktopUI.ViewModels
 {
     public class MainWinwowViewModel
     {
-            
-        private GreetService service = new GreetService();
-
         public ICommand GreetCommand { get; private set; }
-        public ICommand SampleCommand { get; private set; }
-
 
         public MainWinwowViewModel()
         {
-            GreetCommand = new Commands((obj) => { return true; }, (obj) => { Greet();  });
-            SampleCommand = new Commands((obj) => { return File.Exists("/token.json/Google.Apis.Auth.OAuth2.Responses.TokenResponse-user"); }, (obj) => { /*service.Sample();*/ });
-        }
-
-        public void Greet()
-        {
-            Task task = Task.Factory.StartNew(() => service.Greet("Janos"));
+            GreetCommand = new Commands((obj) => { return true; }, (obj) => { new GreetService();  });
         }
     }
 }

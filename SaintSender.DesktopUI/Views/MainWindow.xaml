@@ -39,7 +39,9 @@
 
 
 
-        <ContentControl Panel.ZIndex="0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Content="{Binding}"/>
+        <ContentControl Panel.ZIndex="0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5">
+            <Button Content="Button" HorizontalAlignment="Left" Margin="346,133,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        </ContentControl>
     </Grid>
 
 
