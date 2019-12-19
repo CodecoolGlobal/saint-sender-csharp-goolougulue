@@ -26,6 +26,11 @@ namespace SaintSender.Core.Services
         static string[] Scopes = { GmailService.Scope.MailGoogleCom };
         static string ApplicationName = "Gmail API .NET Quickstart";
         private GmailService _service;
+        public string UserMailAddress()
+        {
+            var user = _service.Users.GetProfile("me").Execute();
+            return user.EmailAddress;
+        }
 
         public void Sample()
         {

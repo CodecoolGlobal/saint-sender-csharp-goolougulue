@@ -42,11 +42,5 @@ namespace SaintSender.DesktopUI
             this.DataContext = new AllMailViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MailSender send = new MailSender();
-            send.Show();
-            this.Close();
-        }
     }
 }

@@ -32,6 +32,7 @@ namespace SaintSender.DesktopUI.ViewModels
                 (obj) => { return true; },
                 (obj) => Mails.ToList().ForEach((item) => SaveMails(item))
                 );
+
         }
 
 

@@ -13,10 +13,7 @@ namespace SaintSender.Core.Entities
         {
 
         }
-        public CostumMail(string from, string to)
-        {
-
-        }
+        
         public CostumMail(string from, string to, string subject, string message)
         {
             Body = message;

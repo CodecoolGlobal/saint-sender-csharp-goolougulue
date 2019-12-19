@@ -30,6 +30,9 @@ namespace SaintSender.DesktopUI.Views
             this.DataContext = _mailSender;
         }
 
-       
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

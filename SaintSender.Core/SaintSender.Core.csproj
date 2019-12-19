@@ -70,7 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\CostumMail.cs" />
-    <Compile Include="Entities\CreateMail.cs" />
     <Compile Include="Entities\MessageCoding.cs" />
     <Compile Include="Entities\MessageSerializer.cs" />
     <Compile Include="Services\GreetService.cs" />

@@ -20,22 +20,22 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Name="data" Grid.Row="0">
-            <TextBox Name="To" HorizontalAlignment="Left" Height="23" Margin="10,39,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="185"/>
-            <TextBox Name="Subject" HorizontalAlignment="Left" Height="23" Margin="10,94,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="185"/>
-            <TextBox Name="Message" HorizontalAlignment="Left" Height="203" Margin="10,136,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="772"/>
+            <TextBox Name="To" HorizontalAlignment="Left" Height="23" Margin="10,39,0,0" TextWrapping="Wrap" Text="{Binding Path=To, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="185" />
+            <TextBox Name="Subject" HorizontalAlignment="Left" Height="23" Margin="10,94,0,0" TextWrapping="Wrap" Text="{Binding Path=Subject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="185"/>
+            <TextBox Name="Message" HorizontalAlignment="Left" Height="203" Margin="10,136,0,0" TextWrapping="Wrap" Text="{Binding Path=Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="772"/>
         </Grid>
         <Grid Name="Buttons" Grid.Row="1">
             <Button Name="Send" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="120" Margin="505,10,0,0" Content="Send" Command="{Binding SendCommand}">
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource MyMultiConverter}">
-                        <Binding Path="To.Value" ElementName="To"></Binding>
-                        <Binding Path="Subject.Value" ElementName="Subject"/>
-                        <Binding Path="Message.Value" ElementName="Message"/>
+                        <Binding Path="DataContext.To" ElementName="To"></Binding>
+                        <Binding Path="DataContext.Subject" ElementName="Subject"/>
+                        <Binding Path="DataContext.Message" ElementName="Message"/>
                     </MultiBinding>
                 </Button.CommandParameter>
             </Button>
             
-            <Button Name="Cancel" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="120" Margin="0,10,10,0" Content="Cancel"></Button>
+            <Button Name="Cancel" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="120" Margin="0,10,10,0" Content="Cancel" Click="Cancel_Click"></Button>
         </Grid>
     </Grid>
 </Window>
