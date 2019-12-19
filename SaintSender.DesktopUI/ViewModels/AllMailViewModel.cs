@@ -50,7 +50,7 @@ namespace SaintSender.DesktopUI.ViewModels
         {
             while (true)
             {
-                System.Threading.Thread.Sleep(5000);
+                System.Threading.Thread.Sleep(2000);
                 ObservableCollection<Message> msgs = new ObservableCollection<Message>();
                 Service.GetMails("INBOX", msgs, _itemsLock);
                 List<Message> difference = msgs.Except(Mails,new SizesComparer()).ToList();
